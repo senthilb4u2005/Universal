@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/splashRoot"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_red_light"
+    tools:context=".view.login.SplashFragment">
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/splash"
+        android:id="@+id/splash"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
