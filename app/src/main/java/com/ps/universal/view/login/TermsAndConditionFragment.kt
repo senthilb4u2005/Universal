@@ -1,60 +1,54 @@
 package com.ps.universal.view.login
 
+import android.app.Application
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.ps.universal.R
+import com.ps.universal.view.dashboard.DashboardActivity
+import com.ps.universal.viewmodel.LoginViewModel
+import com.ps.universal.viewmodel.LoginViewModelFactory
+import com.ps.universal.viewmodel.TermsAndConditionEvent
+import kotlinx.android.synthetic.main.fragment_terms_and_condition.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TermsAndConditionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TermsAndConditionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class TermsAndConditionFragment : Fragment(R.layout.fragment_terms_and_condition) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val viewModel by viewModels<LoginViewModel> {
+        LoginViewModelFactory(requireContext().applicationContext as Application)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        accept.setOnClickListener {
+            viewModel.onTermsAndConditionAccept()
         }
-    }
+        decline.setOnClickListener {
+            viewModel.onTermsAndConditionDecline()
+        }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_terms_and_condition, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TermsAndConditionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TermsAndConditionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        viewModel.termsAndConditionLiveData.observe(viewLifecycleOwner, Observer { it ->
+            it.getValueIfNotHandled()?.let { termsAndConditionEvent ->
+                when (termsAndConditionEvent) {
+                    is TermsAndConditionEvent.Accept -> {
+                        requireActivity().startActivity(
+                            Intent(
+                                requireActivity(),
+                                DashboardActivity::class.java
+                            )
+                        )
+                        requireActivity().finish()
+                    }
+                    is TermsAndConditionEvent.Decline -> {
+                        requireActivity().finish()
+                    }
                 }
             }
+        })
     }
+
+
 }

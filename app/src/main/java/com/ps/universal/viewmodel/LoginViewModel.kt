@@ -13,7 +13,7 @@ import com.ps.universal.usermanager.UserMangerImp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val app: Application, private val userManager: UserManager) :
+class LoginViewModel (private val app: Application, private val userManager: UserManager) :
     ViewModel() {
 
 
@@ -33,18 +33,22 @@ class LoginViewModel(private val app: Application, private val userManager: User
 
     private val mutableSignUpLiveData = MutableLiveData<Event<SignUpEvent>>()
 
+
+    val termsAndConditionLiveData: LiveData<Event<TermsAndConditionEvent>>
+    get() = mutableTermsAndConditionLiveData
+
+    private val mutableTermsAndConditionLiveData = MutableLiveData<Event<TermsAndConditionEvent>>()
+
     fun splashLaunched() {
 
 
         viewModelScope.launch {
             delay(2000)
-            mutableSplashLiveData.value = Event(SplashEvent.DoSignIn)
-//            if (isUserLoggedIn()) {
-//                mutableSplashLiveData.value = Event(SplashEvent.DoSignIn)
-//
-//            } else {
-//                mutableSplashLiveData.value = Event(SplashEvent.DoSignUp)
-//            }
+            if (isUserLoggedIn()) {
+                mutableSplashLiveData.value = Event(SplashEvent.DoSignIn)
+            } else {
+                mutableSplashLiveData.value = Event(SplashEvent.DoSignUp)
+            }
         }
     }
 
@@ -92,6 +96,17 @@ class LoginViewModel(private val app: Application, private val userManager: User
 
     }
 
+    fun onTermsAndConditionDecline() {
+
+        mutableTermsAndConditionLiveData.value = Event(TermsAndConditionEvent.Decline)
+        userManager.clearUserData()
+    }
+
+    fun onTermsAndConditionAccept() {
+
+        mutableTermsAndConditionLiveData.value = Event(TermsAndConditionEvent.Accept)
+    }
+
 
     private val isBiometricAuthenticationAvailable: Boolean
         get() {
@@ -122,6 +137,10 @@ sealed class SignUpEvent {
 
 }
 
+sealed class TermsAndConditionEvent {
+    object Accept: TermsAndConditionEvent()
+    object Decline: TermsAndConditionEvent()
+}
 
 @Suppress("UNCHECKED_CAST")
 class LoginViewModelFactory(val app: Application) : ViewModelProvider.NewInstanceFactory() {
