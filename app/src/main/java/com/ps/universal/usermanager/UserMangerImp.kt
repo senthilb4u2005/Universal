@@ -10,7 +10,7 @@ const val USER_LOCATION = "USER_LOCATION"
 const val PREFERENCE_NAME = "UNIVERSAL_PREFERENCE"
 
 
-class UserMangerImp @Inject constructor(val preferences: SharedPreferences) : UserManager {
+class UserMangerImp @Inject constructor(private val preferences: SharedPreferences) : UserManager {
 
     override fun setUser(user: User) {
         preferences.edit().putString(USER_NAME, user.name)

@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ps.universal.R
-import com.ps.universal.viewmodel.LoginViewModel
+import com.ps.universal.viewmodel.RegistrationViewModel
 import com.ps.universal.viewmodel.LoginViewModelFactory
 import com.ps.universal.viewmodel.SignUpEvent
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
 
-    private val viewModel by viewModels<LoginViewModel> {
+    private val viewModel by viewModels<RegistrationViewModel> {
         LoginViewModelFactory(requireContext().applicationContext as Application)
     }
 

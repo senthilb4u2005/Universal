@@ -1,28 +1,23 @@
 package com.ps.universal.view.login
 
 import android.app.Application
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
-import android.widget.Toast
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.ps.universal.R
-import com.ps.universal.view.dashboard.DashboardActivity
 import com.ps.universal.viewmodel.SplashEvent
-import com.ps.universal.viewmodel.LoginViewModel
+import com.ps.universal.viewmodel.RegistrationViewModel
 import com.ps.universal.viewmodel.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_splash.*
 
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    val viewModel: LoginViewModel by viewModels<LoginViewModel> {
+    val viewModel: RegistrationViewModel by viewModels<RegistrationViewModel> {
         LoginViewModelFactory(context?.applicationContext as Application)
     }
 

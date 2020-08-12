@@ -10,10 +10,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ps.universal.R
-import com.ps.universal.viewmodel.LoginViewModel
-import io.mockk.MockK
-import io.mockk.every
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
@@ -35,6 +31,7 @@ class SplashFragmentTest {
 
 //        val viewModel = mockk<LoginViewModel>()
 //        every { viewModel.isUserLoggedIn() } returns true
+
 
 
         val scenario = launchFragmentInContainer {

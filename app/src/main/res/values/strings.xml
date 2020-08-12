@@ -31,4 +31,16 @@
     <string name="terms_condition">\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a vulputate ex. Donec varius consequat elit a consectetur. \n\n\t Nulla pharetra, nisi eu bibendum sagittis, lacus ante pretium turpis, a ornare leo lacus ac ex. Cras enim nulla, auctor et ex nec, venenatis tristique magna. \n\n\tPellentesque euismod nibh at metus auctor consequat. Proin nisl magna, pellentesque eget tempor et, maximus sit amet ipsum. Cras egestas, orci non ultricies aliquam, justo ex varius velit, quis semper elit turpis ornare ante. Nullam varius turpis tincidunt malesuada sodales. Fusce sit amet ligula vitae massa vehicula rhoncus a id urna. Maecenas non elementum tellus, at fringilla sem. Nulla facilisi. Donec mi quam, ultricies quis suscipit a, faucibus ut nibh. Aenean nec venenatis felis. Mauris dictum commodo mi, sed viverra enim condimentum non. Phasellus quam mi, vestibulum eu convallis eget, tristique id leo. Sed et lobortis velit.</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_dashboard2">DashboardActivity</string>
+    <string name="title_activity_dashboard21">Dashboard2Activity1</string>
 </resources>

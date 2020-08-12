@@ -2,8 +2,6 @@ package com.ps.universal.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
 import androidx.lifecycle.*
 import com.ps.universal.usermanager.PREFERENCE_NAME
@@ -13,10 +11,8 @@ import com.ps.universal.usermanager.UserMangerImp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class LoginViewModel (private val app: Application, private val userManager: UserManager) :
+class RegistrationViewModel(private val app: Application, private val userManager: UserManager) :
     ViewModel() {
-
-
     val splashLiveData: LiveData<Event<SplashEvent>>
         get() = mutableSplashLiveData
 
@@ -35,13 +31,11 @@ class LoginViewModel (private val app: Application, private val userManager: Use
 
 
     val termsAndConditionLiveData: LiveData<Event<TermsAndConditionEvent>>
-    get() = mutableTermsAndConditionLiveData
+        get() = mutableTermsAndConditionLiveData
 
     private val mutableTermsAndConditionLiveData = MutableLiveData<Event<TermsAndConditionEvent>>()
 
     fun splashLaunched() {
-
-
         viewModelScope.launch {
             delay(2000)
             if (isUserLoggedIn()) {
@@ -64,7 +58,6 @@ class LoginViewModel (private val app: Application, private val userManager: Use
         password: String,
         confirmPassword: String
     ) {
-
         // have to implement with real API. This is only for testing.
         if (password == "Password") {
             userManager.setUser(User(fullName, email, mobileNumber, location))
@@ -72,7 +65,6 @@ class LoginViewModel (private val app: Application, private val userManager: Use
         } else {
             mutableSignUpLiveData.value = Event(SignUpEvent.SignUpFailed("Invalid credentials"))
         }
-
     }
 
     fun doSignIn(email: String, password: String) {
@@ -90,7 +82,7 @@ class LoginViewModel (private val app: Application, private val userManager: Use
     }
 
     fun checkBiometricAuthentication() {
-        if(isBiometricAuthenticationAvailable){
+        if (isBiometricAuthenticationAvailable) {
             mutableSignInLiveData.value = Event(SignInEvent.BiometricAuthentication)
         }
 
@@ -125,6 +117,7 @@ sealed class SplashEvent {
 }
 
 sealed class SignInEvent {
+
     object BiometricAuthentication : SignInEvent()
     data class SignInFailed(val error: String) : SignInEvent()
     object SignInSuccess : SignInEvent()
@@ -138,13 +131,13 @@ sealed class SignUpEvent {
 }
 
 sealed class TermsAndConditionEvent {
-    object Accept: TermsAndConditionEvent()
-    object Decline: TermsAndConditionEvent()
+    object Accept : TermsAndConditionEvent()
+    object Decline : TermsAndConditionEvent()
 }
 
 @Suppress("UNCHECKED_CAST")
 class LoginViewModelFactory(val app: Application) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T = LoginViewModel(
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T = RegistrationViewModel(
         app,
         UserMangerImp(app.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE))
     ) as T

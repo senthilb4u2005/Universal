@@ -2,6 +2,7 @@ package com.ps.universal.view.login
 
 import android.app.Application
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,20 +13,27 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ps.universal.R
-import com.ps.universal.view.dashboard.DashboardActivity
-import com.ps.universal.viewmodel.LoginViewModel
+import com.ps.universal.UniversalApplication
+import com.ps.universal.view.DashboardActivity
+import com.ps.universal.viewmodel.RegistrationViewModel
 import com.ps.universal.viewmodel.LoginViewModelFactory
 import com.ps.universal.viewmodel.SignInEvent
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import javax.inject.Inject
 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
-    val viewModel: LoginViewModel by viewModels<LoginViewModel> {
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
+    private val viewModel: RegistrationViewModel by viewModels {
         LoginViewModelFactory(requireContext().applicationContext as Application)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity().application as UniversalApplication).appComponent.inject(this)
 
         createAccount.setOnClickListener {
             findNavController().navigate(R.id.signUpFragment)
@@ -48,7 +56,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
                     }
                     is SignInEvent.SignInSuccess -> {
-
                         launchDashboard()
                     }
 
@@ -95,6 +102,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     super.onAuthenticationSucceeded(result)
                     launchDashboard()
 
+
                 }
 
                 override fun onAuthenticationFailed() {
@@ -110,7 +118,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         var promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Biometric login for my app")
             .setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText("Check")
+            .setNegativeButtonText("Login")
             .setConfirmationRequired(false)
             .build()
         biometricPrompt.authenticate(promptInfo)

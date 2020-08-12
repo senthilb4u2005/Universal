@@ -17,4 +17,14 @@
     <color name="button_selectorcolor">#9E9E9E</color>
 
 
+    <color name="primaryColor">#01579b</color>
+    <color name="primaryLightColor">#4f83cc</color>
+    <color name="primaryDarkColor">#002f6c</color>
+    <color name="secondaryColor">#a142f4</color>
+    <color name="secondaryLightColor">#d774ff</color>
+    <color name="secondaryDarkColor">#6b00c0</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
+
+
 </resources>

@@ -28,13 +28,12 @@ class SignUpFragmentTest {
         fragmentScenario.onFragment { fragment ->
             Navigation.setViewNavController(fragment.requireView(), navController)
         }
-        onView(withId(R.id.fullName)).check(matches(withHint(R.string.fullName)))
+        onView(withId(R.id.full_name)).check(matches(withHint(R.string.fullName)))
         onView(withId(R.id.userEmailId)).check(matches(withHint(R.string.email)))
         onView(withId(R.id.mobileNumber)).check(matches(withHint(R.string.mobileNumber)))
         onView(withId(R.id.location)).check(matches(withHint(R.string.location)))
         onView(withId(R.id.password)).check(matches(withHint(R.string.passowrd)))
         onView(withId(R.id.confirmPassword)).check(matches(withHint(R.string.confirmPassword)))
-        onView(withId(R.id.terms_conditions)).check(matches(withText(R.string.terms_conditions)))
         onView(withId(R.id.already_user)).perform(ViewActions.click())
         assert(R.id.signInFragment == navController.currentDestination?.id)
     }
@@ -42,6 +41,8 @@ class SignUpFragmentTest {
 
     @Test
     fun alreadySignedInLaunchSignInFragment() {
+
+
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         navController.setGraph(R.navigation.app_nav)
 
