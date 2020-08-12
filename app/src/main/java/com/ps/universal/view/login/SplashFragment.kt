@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_splash.*
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    val viewModel: RegistrationViewModel by viewModels<RegistrationViewModel> {
+    private val viewModel: RegistrationViewModel by viewModels<RegistrationViewModel> {
         LoginViewModelFactory(context?.applicationContext as Application)
     }
 
@@ -28,8 +28,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         viewModel.splashLaunched()
         viewModel.splashLiveData.observe(viewLifecycleOwner, Observer { it ->
             view.findNavController().popBackStack(R.id.splashFragment, true)
-
-
             it.getValueIfNotHandled()?.let { loginOptions ->
                 when (loginOptions) {
                     SplashEvent.DoSignUp -> view.findNavController().navigate(R.id.signUpFragment)
@@ -45,7 +43,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private fun animateSplash() {
         val animation1 = AlphaAnimation(0.0f, 1.0f)
-        animation1.duration = 5000
+        animation1.duration = 2000
         animation1.fillAfter = true
         splashRoot.startAnimation(animation1)
     }

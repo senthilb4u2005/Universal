@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:id="@+id/splashRoot"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:background="@color/colorPrimary"
     tools:context=".view.login.SplashFragment">
     <TextView
 
