@@ -12,11 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputLayout
 import com.ps.universal.R
 import com.ps.universal.UniversalApplication
+import com.ps.universal.usermanager.UserManager
 import com.ps.universal.view.DashboardActivity
-import com.ps.universal.viewmodel.RegistrationViewModel
 import com.ps.universal.viewmodel.LoginViewModelFactory
+import com.ps.universal.viewmodel.RegistrationViewModel
 import com.ps.universal.viewmodel.SignInEvent
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
@@ -26,15 +28,18 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
+    @Inject lateinit var userManager: UserManager
+
     private val viewModel: RegistrationViewModel by viewModels {
         LoginViewModelFactory(requireContext().applicationContext as Application)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         (requireActivity().application as UniversalApplication).appComponent.inject(this)
 
+        txt_email.setText( userManager.getEmail())
+        txt_password.requestFocus()
         createAccount.setOnClickListener {
             findNavController().navigate(R.id.signUpFragment)
         }
@@ -51,9 +56,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             it.getValueIfNotHandled().let { signInEvent ->
                 when (signInEvent) {
                     is SignInEvent.SignInFailed -> {
-                        Toast.makeText(requireContext(), signInEvent.error, Toast.LENGTH_SHORT)
-                            .show()
-
+                        login_password.error = getString(signInEvent.error)
                     }
                     is SignInEvent.SignInSuccess -> {
                         launchDashboard()

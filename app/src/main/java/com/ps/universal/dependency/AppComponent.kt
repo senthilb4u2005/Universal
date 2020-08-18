@@ -4,6 +4,7 @@ import android.content.Context
 import com.ps.universal.view.MainActivity
 import com.ps.universal.view.login.SignInFragment
 import com.ps.universal.view.login.SignUpFragment
+import com.ps.universal.view.login.SplashFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,4 +21,5 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(fragment: SignInFragment)
     fun inject(fragment: SignUpFragment)
+    fun inject(fragment: SplashFragment)
 }

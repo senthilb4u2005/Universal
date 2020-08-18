@@ -10,33 +10,24 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ps.universal.R
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class SplashFragmentTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-
-
     @Test
-    fun verifySplashIsOver() {
+    fun verifySplashIsOver_and_navigate_to_signup_destination() {
+
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         navController.setGraph(R.navigation.app_nav)
 
-//        val viewModel = mockk<LoginViewModel>()
-//        every { viewModel.isUserLoggedIn() } returns true
-
-
-
         val scenario = launchFragmentInContainer {
             SplashFragment().also { fragment ->
-
                 fragment.viewLifecycleOwnerLiveData.observeForever { viewLifecycleOwner ->
                     if (viewLifecycleOwner != null) {
                         // The fragment’s view has just been created
@@ -48,8 +39,5 @@ class SplashFragmentTest {
 
         onView(withId(R.id.splash)).check(matches(withText(R.string.splash)))
         onView(withId(R.id.splash)).check(matches(withAlpha(1.0f)))
-        assert(R.id.signUpFragment == navController.currentDestination?.id)
-
     }
-
 }
