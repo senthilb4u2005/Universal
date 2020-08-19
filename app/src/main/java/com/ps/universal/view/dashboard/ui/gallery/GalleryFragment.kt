@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ps.universal.R
+import com.ps.universal.view.dashboard.ui.BaseFragment
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : BaseFragment() {
 
     private lateinit var galleryViewModel: GalleryViewModel
+    override fun isAuthenticationRequired() = true
 
     override fun onCreateView(
             inflater: LayoutInflater,

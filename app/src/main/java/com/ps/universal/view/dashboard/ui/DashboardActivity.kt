@@ -1,4 +1,4 @@
-package com.ps.universal.view
+package com.ps.universal.view.dashboard.ui
 
 
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.ps.universal.view
+package com.ps.universal.view.registration
 
 import android.os.Bundle
 import android.view.Window
@@ -6,7 +6,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.ps.universal.R
 
-class MainActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.registration_activity)
     }
 }

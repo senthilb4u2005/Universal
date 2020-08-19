@@ -13,10 +13,7 @@ import kotlinx.coroutines.launch
 
 class RegistrationViewModel(private val app: Application, private val userManager: UserManager) :
     ViewModel() {
-    val splashLiveData: LiveData<Event<SplashEvent>>
-        get() = mutableSplashLiveData
 
-    private val mutableSplashLiveData = MutableLiveData<Event<SplashEvent>>()
 
     val signInLiveData: LiveData<Event<SignInEvent>>
         get() = mutableSignInLiveData
@@ -34,17 +31,6 @@ class RegistrationViewModel(private val app: Application, private val userManage
         get() = mutableTermsAndConditionLiveData
 
     private val mutableTermsAndConditionLiveData = MutableLiveData<Event<TermsAndConditionEvent>>()
-
-    fun splashLaunched() {
-        viewModelScope.launch {
-            delay(2000)
-            if (isUserLoggedIn()) {
-                mutableSplashLiveData.value = Event(SplashEvent.DoSignIn)
-            } else {
-                mutableSplashLiveData.value = Event(SplashEvent.DoSignUp)
-            }
-        }
-    }
 
 
     private fun isUserLoggedIn(): Boolean = userManager.isUserLoggedIn()
@@ -110,11 +96,6 @@ class RegistrationViewModel(private val app: Application, private val userManage
 }
 
 
-sealed class SplashEvent {
-
-    object DoSignIn : SplashEvent()
-    object DoSignUp : SplashEvent()
-}
 
 sealed class SignInEvent {
 
@@ -125,9 +106,7 @@ sealed class SignInEvent {
 
 sealed class SignUpEvent {
     object SignUpSuccess : SignUpEvent()
-    object ShowDashboardActivity : SignUpEvent()
     data class SignUpFailed(val error: String) : SignUpEvent()
-
 }
 
 sealed class TermsAndConditionEvent {
@@ -136,7 +115,7 @@ sealed class TermsAndConditionEvent {
 }
 
 @Suppress("UNCHECKED_CAST")
-class LoginViewModelFactory(val app: Application) : ViewModelProvider.NewInstanceFactory() {
+class RegistrationViewModelFactory(val app: Application) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = RegistrationViewModel(
         app,
         UserMangerImp(app.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE))

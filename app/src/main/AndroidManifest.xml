@@ -11,12 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".view.DashboardActivity"
+            android:name=".view.dashboard.ui.DashboardActivity"
             android:label="@string/title_activity_dashboard"
              >
         </activity>
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.registration.RegistrationActivity"
+            android:label="@string/title_activity_dashboard"
+            >
+        </activity>
+        <activity
+            android:name=".view.splash.SplashActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>

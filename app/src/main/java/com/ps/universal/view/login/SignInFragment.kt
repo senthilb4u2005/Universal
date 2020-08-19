@@ -14,9 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ps.universal.R
 import com.ps.universal.UniversalApplication
-import com.ps.universal.view.DashboardActivity
+import com.ps.universal.view.dashboard.ui.DashboardActivity
 import com.ps.universal.viewmodel.RegistrationViewModel
-import com.ps.universal.viewmodel.LoginViewModelFactory
+import com.ps.universal.viewmodel.RegistrationViewModelFactory
 import com.ps.universal.viewmodel.SignInEvent
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     lateinit var sharedPreferences: SharedPreferences
 
     private val viewModel: RegistrationViewModel by viewModels {
-        LoginViewModelFactory(requireContext().applicationContext as Application)
+        RegistrationViewModelFactory(requireContext().applicationContext as Application)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +68,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         deleteUser.setOnClickListener {
             viewModel.removeRegisteredUser()
-            findNavController().popBackStack(R.id.signInFragment, true)
             findNavController().navigate(R.id.signUpFragment)
 
         }

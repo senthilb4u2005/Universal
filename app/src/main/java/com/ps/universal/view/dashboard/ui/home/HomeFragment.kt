@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ps.universal.view.dashboard.ui.home.HomeViewModel
 import com.ps.universal.R
+import com.ps.universal.view.dashboard.ui.BaseFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+    override fun isAuthenticationRequired() = true
 
     override fun onCreateView(
             inflater: LayoutInflater,

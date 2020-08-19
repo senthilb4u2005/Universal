@@ -9,34 +9,33 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.ps.universal.R
-import com.ps.universal.viewmodel.SplashEvent
 import com.ps.universal.viewmodel.RegistrationViewModel
-import com.ps.universal.viewmodel.LoginViewModelFactory
+import com.ps.universal.viewmodel.RegistrationViewModelFactory
 import kotlinx.android.synthetic.main.fragment_splash.*
 
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private val viewModel: RegistrationViewModel by viewModels<RegistrationViewModel> {
-        LoginViewModelFactory(context?.applicationContext as Application)
+        RegistrationViewModelFactory(context?.applicationContext as Application)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        viewModel.splashLaunched()
-        viewModel.splashLiveData.observe(viewLifecycleOwner, Observer { it ->
-            view.findNavController().popBackStack(R.id.splashFragment, true)
-            it.getValueIfNotHandled()?.let { loginOptions ->
-                when (loginOptions) {
-                    SplashEvent.DoSignUp -> view.findNavController().navigate(R.id.signUpFragment)
-                    SplashEvent.DoSignIn -> view.findNavController().navigate(R.id.signInFragment)
-                }
-            }
-
-        })
-        animateSplash()
+//        viewModel.splashLaunched()
+//        viewModel.splashLiveData.observe(viewLifecycleOwner, Observer { it ->
+//            view.findNavController().popBackStack(R.id.splashFragment, true)
+//            it.getValueIfNotHandled()?.let { loginOptions ->
+//                when (loginOptions) {
+//                    SplashEvent.DoSignUp -> view.findNavController().navigate(R.id.signUpFragment)
+//                    SplashEvent.DoSignIn -> view.findNavController().navigate(R.id.signInFragment)
+//                }
+//            }
+//
+//        })
+//        animateSplash()
     }
 
 

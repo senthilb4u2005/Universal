@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ps.universal.R
+import com.ps.universal.view.dashboard.ui.BaseFragment
 
-class SlideshowFragment : Fragment() {
+class SlideshowFragment : BaseFragment() {
 
     private lateinit var slideshowViewModel: SlideshowViewModel
+    override fun isAuthenticationRequired() = true
 
     override fun onCreateView(
             inflater: LayoutInflater,
